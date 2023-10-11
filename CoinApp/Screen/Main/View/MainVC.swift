@@ -12,26 +12,37 @@ class MainVC: UIViewController {
     private var viewModel: MainVMProtocol!
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+        setDelegate()
+        tableView.register(MainTableViewCell.nib, forCellReuseIdentifier: MainTableViewCell.identifier)
+    }
+    
+    private func setup() {
         let initilazer = MainVM(networkManager: NetworkManager())
         viewModel = initilazer
         viewModel.fetchUpComingDataList()
-//        setDelegate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.tableView.reloadData()
+        }
     }
 }
 
-//extension MainVC: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell., for: indexPath) as! MainTableViewCell
-//        return cell
-//    }
-//
-//    private func setDelegate() {
-//        tableView.dataSource = self
-//        tableView.delegate = self
-//    }
-//}
+extension MainVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfItems
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as! MainTableViewCell
+        let model = viewModel.coinArray?[indexPath.row]
+        cell.populate(model: model)
+        return cell
+    }
+
+    private func setDelegate() {
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    
+}
 

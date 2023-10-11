@@ -9,14 +9,15 @@ import Foundation
 
 protocol MainVMProtocol {
     var numberOfItems: Int { get }
-    var coinArray: [Coin] { get }
+    var coinArray: [Coin]? { get }
     func fetchUpComingDataList()
 }
 
 class MainVM {
     let networkManager: NetworkManager<MainEndpointItem>
-    var coinArray: [Coin] = []
-    var numberOfItems: Int { coinArray.count }
+    var coinArray: [Coin]? = []
+    var numberOfItems: Int { coinArray?.count ?? 0 }
+    
     init(networkManager: NetworkManager<MainEndpointItem>) {
         self.networkManager = networkManager
     }
@@ -26,7 +27,8 @@ class MainVM {
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                coinArray = response.data.coins
+                coinArray = response.data?.coins
+//                print(coinArray)
             case .failure(let error):
                 print(String(describing: error))
             }

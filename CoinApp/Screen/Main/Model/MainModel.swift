@@ -6,31 +6,32 @@
 //
 
 import Foundation
+
 // MARK: - Coins
 struct Coins: Codable {
-    let status: String
-    let data: DataClass
+    let status: String?
+    let data: DataClass?
 }
 
 // MARK: - DataClass
 struct DataClass: Codable {
-    let stats: Stats
-    let coins: [Coin]
+    let stats: Stats?
+    let coins: [Coin]?
 }
 
 // MARK: - Coin
 struct Coin: Codable {
-    let uuid, symbol, name: String
+    let uuid, symbol, name: String?
     let color: String?
-    let iconURL: String
-    let marketCap, price: String
-    let listedAt, tier: Int
-    let change: String
-    let rank: Int
-    let sparkline: [String]
-    let lowVolume: Bool
-    let coinrankingURL: String
-    let the24HVolume, btcPrice: String
+    let iconURL: String?
+    let marketCap, price: String?
+    let listedAt, tier: Int?
+    let change: String?
+    let rank: Int?
+    let sparkline: [String]?
+    let lowVolume: Bool?
+    let coinrankingURL: String?
+    let the24HVolume, btcPrice: String?
 
     enum CodingKeys: String, CodingKey {
         case uuid, symbol, name, color
@@ -44,8 +45,8 @@ struct Coin: Codable {
 
 // MARK: - Stats
 struct Stats: Codable {
-    let total, totalCoins, totalMarkets, totalExchanges: Int
-    let totalMarketCap, total24HVolume: String
+    let total, totalCoins, totalMarkets, totalExchanges: Int?
+    let totalMarketCap, total24HVolume: String?
 
     enum CodingKeys: String, CodingKey {
         case total, totalCoins, totalMarkets, totalExchanges, totalMarketCap
