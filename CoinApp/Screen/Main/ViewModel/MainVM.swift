@@ -6,15 +6,23 @@
 //
 
 import Foundation
+import UIKit
 
-protocol MainVMProtocol {
+protocol MainDisplayLayer: AnyObject {
+    func push(controller: UIViewController)
+}
+
+protocol MainBusinessLayer {
     var numberOfItems: Int { get }
+    var view: MainDisplayLayer? { get set }
     var coinArray: [Coin]? { get }
     func fetchUpComingDataList()
+    func navigateToDetails(model: Coin, viewController: UIViewController)
 }
 
 class MainVM {
     let networkManager: NetworkManager<MainEndpointItem>
+    weak var view: MainDisplayLayer?
     var coinArray: [Coin]? = []
     var numberOfItems: Int { coinArray?.count ?? 0 }
     
@@ -36,5 +44,19 @@ class MainVM {
     }
 }
 
-extension MainVM: MainVMProtocol {
+extension MainVM: MainBusinessLayer {
+    func navigateToDetails(model: Coin, viewController: UIViewController) {
+        let viewModel = DetailsVM(model: model)
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsVC") as! DetailsVC
+        resultViewController.viewModel = viewModel
+        self.view?.push(controller: resultViewController)
+    }
+}
+
+class BaseNavigationController: UINavigationController, UINavigationControllerDelegate {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        delegate = self
+    }
 }

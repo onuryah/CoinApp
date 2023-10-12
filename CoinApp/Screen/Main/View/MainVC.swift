@@ -9,7 +9,7 @@ import UIKit
 
 class MainVC: UIViewController {
     @IBOutlet weak private var tableView: UITableView!
-    private var viewModel: MainVMProtocol!
+    var viewModel: MainBusinessLayer!
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -21,6 +21,7 @@ class MainVC: UIViewController {
         let initilazer = MainVM(networkManager: NetworkManager())
         viewModel = initilazer
         viewModel.fetchUpComingDataList()
+        viewModel.view = self
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.tableView.reloadData()
         }
@@ -38,11 +39,21 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
         cell.populate(model: model)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedModel = (viewModel.coinArray?[indexPath.row])!
+        viewModel.navigateToDetails(model: selectedModel, viewController: self)
+    }
 
     private func setDelegate() {
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
+}
+
+extension MainVC: MainDisplayLayer {
+    func push(controller: UIViewController) {
+        show(controller, sender: nil)
+    }
 }
 
