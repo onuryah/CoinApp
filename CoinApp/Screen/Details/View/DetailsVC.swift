@@ -16,6 +16,7 @@ class DetailsVC: UIViewController {
     @IBOutlet weak var highestPrice: UILabel!
     @IBOutlet weak var lowestPrice: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var timeStampLabel: UILabel!
     
     var viewModel: DetailsBusinessProtocol!
 
@@ -28,14 +29,11 @@ class DetailsVC: UIViewController {
         let selectedModel = viewModel.model
         symbolLabel.text = selectedModel.symbol
         nameLabel.text = selectedModel.name
-        currentPrice.text = selectedModel.price?.roundToTwoDecimalPlaces()
         perChangeLabel.text = selectedModel.change
         priceChangeLabel.text = "hesaplanacak"
         
-        guard let result = calculateHigestAndLowest(sparkline: selectedModel.sparkline) else { return }
-        let (highest, lowest) = result
-        highestPrice.text = highest.roundToTwoDecimalPlaces()
-        lowestPrice.text = lowest.roundToTwoDecimalPlaces()
+        
+        setDelegates()
     }
 }
 
@@ -43,5 +41,23 @@ extension DetailsVC {
     private func calculateHigestAndLowest(sparkline: [String]?) -> (String, String)? {
         guard let maxString = sparkline?.max(), let minString = sparkline?.min() else { return nil }
         return (maxString, minString)
+    }
+}
+
+extension DetailsVC: UITableViewDelegate, UITableViewDataSource {
+    private func setDelegates() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfItems
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = ""
+        cell.textLabel?.textAlignment = .center
+        return cell
     }
 }

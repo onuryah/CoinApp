@@ -142,6 +142,12 @@
                                 <rect key="frame" x="24" y="416.5" width="366" height="445.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFn-A8-qgr">
+                                <rect key="frame" x="356.5" y="155.5" width="41.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sho-hu-zZO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -155,6 +161,8 @@
                             <constraint firstItem="iNT-ak-DtI" firstAttribute="centerX" secondItem="3Dh-59-Uxa" secondAttribute="centerX" id="N7Q-iK-wG1"/>
                             <constraint firstItem="iNT-ak-DtI" firstAttribute="top" secondItem="sho-hu-zZO" secondAttribute="top" constant="64" id="NPv-bI-GR0"/>
                             <constraint firstItem="uJN-IJ-Jxy" firstAttribute="top" secondItem="iNT-ak-DtI" secondAttribute="bottom" constant="64" id="TCs-Mk-t2J"/>
+                            <constraint firstItem="sFn-A8-qgr" firstAttribute="centerY" secondItem="iNT-ak-DtI" secondAttribute="centerY" id="YEI-Z3-Nfa"/>
+                            <constraint firstItem="sho-hu-zZO" firstAttribute="trailing" secondItem="sFn-A8-qgr" secondAttribute="trailing" constant="16" id="b8d-6K-j6g"/>
                             <constraint firstItem="uJN-IJ-Jxy" firstAttribute="leading" secondItem="sho-hu-zZO" secondAttribute="leading" constant="32" id="sfP-hN-lgg"/>
                         </constraints>
                     </view>
@@ -167,6 +175,7 @@
                         <outlet property="priceChangeLabel" destination="CrK-Na-SaE" id="IwS-vg-EgO"/>
                         <outlet property="symbolLabel" destination="Gf0-bC-Sga" id="paw-X9-2dh"/>
                         <outlet property="tableView" destination="OPE-pi-JnT" id="hn9-Kb-gQx"/>
+                        <outlet property="timeStampLabel" destination="sFn-A8-qgr" id="Xha-EG-dxU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n9g-CA-mPQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

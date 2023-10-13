@@ -25,6 +25,7 @@
 		A23791D82AD5745200238F6D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A23791D72AD5745200238F6D /* Alamofire */; };
 		A23791DC2AD576AA00238F6D /* MainEndpointItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23791DB2AD576AA00238F6D /* MainEndpointItem.swift */; };
 		A2B2412C2AD940FA0005F5E8 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B2412B2AD940F90005F5E8 /* StringExtension.swift */; };
+		A2D7F24D2AD976C9002821BF /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D7F24C2AD976C9002821BF /* IntExtension.swift */; };
 		A2E6B0D82AD6C76E00232369 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E6B0D62AD6C76E00232369 /* MainTableViewCell.swift */; };
 		A2E6B0D92AD6C76E00232369 /* MainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E6B0D72AD6C76E00232369 /* MainTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		A23791D42AD5706A00238F6D /* ApiClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientError.swift; sourceTree = "<group>"; };
 		A23791DB2AD576AA00238F6D /* MainEndpointItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEndpointItem.swift; sourceTree = "<group>"; };
 		A2B2412B2AD940F90005F5E8 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		A2D7F24C2AD976C9002821BF /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		A2E6B0D62AD6C76E00232369 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		A2E6B0D72AD6C76E00232369 /* MainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				A2B2412B2AD940F90005F5E8 /* StringExtension.swift */,
+				A2D7F24C2AD976C9002821BF /* IntExtension.swift */,
 			);
 			path = "String+Extension";
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				A2B2412C2AD940FA0005F5E8 /* StringExtension.swift in Sources */,
 				A2E6B0D82AD6C76E00232369 /* MainTableViewCell.swift in Sources */,
 				A23791CF2AD56F5A00238F6D /* NetworkManager.swift in Sources */,
+				A2D7F24D2AD976C9002821BF /* IntExtension.swift in Sources */,
 				A23791C02AD567B200238F6D /* MainModel.swift in Sources */,
 				A23791D12AD5704800238F6D /* EndPoint.swift in Sources */,
 				A23791DC2AD576AA00238F6D /* MainEndpointItem.swift in Sources */,
