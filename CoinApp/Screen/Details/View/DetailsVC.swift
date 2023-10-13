@@ -29,9 +29,15 @@ class DetailsVC: UIViewController {
         let selectedModel = viewModel.model
         symbolLabel.text = selectedModel.symbol
         nameLabel.text = selectedModel.name
+        currentPrice.text = selectedModel.price?.roundToTwoDecimalPlaces(digit: .two)
         perChangeLabel.text = selectedModel.change
         priceChangeLabel.text = "hesaplanacak"
+        timeStampLabel.text = selectedModel.listedAt?.unixTimestampToDate()
         
+        guard let result = calculateHigestAndLowest(sparkline: selectedModel.sparkline) else { return }
+        let (highest, lowest) = result
+        highestPrice.text = highest.roundToTwoDecimalPlaces(digit: .two)
+        lowestPrice.text = lowest.roundToTwoDecimalPlaces(digit: .two)
         
         setDelegates()
     }
@@ -56,7 +62,7 @@ extension DetailsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = ""
+        cell.textLabel?.text = viewModel.model.sparkline?[indexPath.row].roundToTwoDecimalPlaces(digit: .two)
         cell.textLabel?.textAlignment = .center
         return cell
     }
