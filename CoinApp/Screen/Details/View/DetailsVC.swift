@@ -32,18 +32,19 @@ class DetailsVC: UIViewController {
         currentPrice.text = selectedModel.price?.formatNumber(digit: .two).addCurrencySymbol()
         perChangeLabel.text = selectedModel.change
         perChangeLabel.textColor = viewModel.getColor(changeString: selectedModel.change ?? "")
-        priceChangeLabel.text = viewModel.calculatePriceChanging(priceArray: viewModel.model.sparkline!)
-        priceChangeLabel.textColor = perChangeLabel.textColor
         timeStampLabel.text = selectedModel.listedAt?.unixTimestampToDate()
         
+        setDelegates()
+        guard let price = viewModel.calculateChange(inputNumberString: selectedModel.price ?? "",
+                                                    percentageChangeString: selectedModel.change ?? "")?.formatNumber(digit: .two) else { return }
+        priceChangeLabel.text = "(\(price)))"
+        priceChangeLabel.textColor = perChangeLabel.textColor
         guard let result = viewModel.calculateHigestAndLowest(sparkline: selectedModel.sparkline) else { return }
         let (highest, lowest) = result
         highestPrice.text = highest.formatNumber(digit: .two)
         highestPrice.textColor = .green
         lowestPrice.text = lowest.formatNumber(digit: .two)
         lowestPrice.textColor = .red
-        
-        setDelegates()
     }
 }
 

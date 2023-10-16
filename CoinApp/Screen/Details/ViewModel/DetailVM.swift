@@ -13,7 +13,7 @@ protocol DetailsBusinessProtocol {
     var numberOfItems: Int { get }
     func getColor(changeString: String) -> UIColor
     func calculateHigestAndLowest(sparkline: [String]?) -> (String, String)?
-    func calculatePriceChanging(priceArray: [String]) -> String
+    func calculateChange(inputNumberString: String, percentageChangeString: String) -> String?
 }
 
 final class DetailsVM {
@@ -46,14 +46,8 @@ extension DetailsVM: DetailsBusinessProtocol {
         return (maxString, minString)
     }
     
-    func calculatePriceChanging(priceArray: [String]) -> String {
-        guard priceArray.count >= 2,
-              let lastPrice = Double(priceArray.last ?? ""),
-              let secondToLastPrice = Double(priceArray[priceArray.count - 2]) else {
-            return "Hesaplanamadı"
-        }
-
-        let priceDifference = lastPrice - secondToLastPrice
-        return String(format: "%.2f", priceDifference)
+    func calculateChange(inputNumberString: String, percentageChangeString: String) -> String? {
+        PriceHelper.shared.calculateChange(inputNumberString: inputNumberString,
+                                           percentageChangeString: percentageChangeString)
     }
 }
