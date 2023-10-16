@@ -27,18 +27,7 @@ final class DetailsVM {
 
 extension DetailsVM: DetailsBusinessProtocol {
     func getColor(changeString: String) -> UIColor {
-        guard let change = Float(changeString) else {
-            return .black
-        }
-        
-        switch change {
-        case ..<0:
-            return .red
-        case 0...:
-            return .green
-        default:
-            return .black
-        }
+        PriceHelper.shared.getColor(changeString: changeString)
     }
     
     func calculateHigestAndLowest(sparkline: [String]?) -> (String, String)? {

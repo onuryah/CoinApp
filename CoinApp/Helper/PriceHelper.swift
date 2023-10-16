@@ -5,6 +5,7 @@
 //  Created by OnurAlp on 16.10.2023.
 //
 
+import UIKit
 
 struct PriceHelper {
     static let shared = PriceHelper()
@@ -20,5 +21,20 @@ struct PriceHelper {
         let result = inputNumber + (percentageChange < 0 ? -changeAmount : changeAmount)
         let difference = String(inputNumber - result).replacingOccurrences(of: "-", with: "").addCurrencySymbol()
         return "\(sign)\(difference)"
+    }
+    
+    func getColor(changeString: String) -> UIColor {
+        guard let change = Float(changeString) else {
+            return .black
+        }
+        
+        switch change {
+        case ..<0:
+            return .red
+        case 0...:
+            return .green
+        default:
+            return .black
+        }
     }
 }

@@ -9,12 +9,18 @@ import UIKit
 
 class MainVC: UIViewController {
     @IBOutlet weak private var tableView: UITableView!
+    @IBOutlet weak var sortTypeView: UIView!
+    @IBOutlet weak var sortTypeLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     var viewModel: MainBusinessLayer!
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setDelegate()
+        setGestureRecognizer()
         tableView.register(MainTableViewCell.nib, forCellReuseIdentifier: MainTableViewCell.identifier)
+        collectionView.register(MainCollectionViewCell.nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
     }
     
     private func setup() {
@@ -23,6 +29,16 @@ class MainVC: UIViewController {
         viewModel.fetchUpComingDataList()
         viewModel.view = self
         viewModel.delegate = self
+    }
+    
+    private func setGestureRecognizer() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(sortTypeViewTapped))
+        sortTypeView.addGestureRecognizer(tap)
+    }
+    
+    @objc func sortTypeViewTapped() {
+        collectionView.isHidden = false
+        collectionView.reloadData()
     }
 }
 
@@ -46,6 +62,8 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
     private func setDelegate() {
         tableView.dataSource = self
         tableView.delegate = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
 }
 
@@ -61,5 +79,27 @@ extension MainVC: MainTableViewDelegate {
             self.tableView.reloadData()
         }
     }
+}
+
+extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.sortArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as! MainCollectionViewCell
+        cell.populate(type: viewModel.sortArray[indexPath.row])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selected = viewModel.sortArray[indexPath.row]
+        viewModel.selectedSortType = selected
+        sortTypeLabel.text = selected
+        viewModel.sortDataList()
+        reloadData()
+        collectionView.isHidden = true
+    }
+    
 }
 

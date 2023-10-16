@@ -37,7 +37,7 @@ class DetailsVC: UIViewController {
         setDelegates()
         guard let price = viewModel.calculateChange(inputNumberString: selectedModel.price ?? "",
                                                     percentageChangeString: selectedModel.change ?? "")?.formatNumber(digit: .two) else { return }
-        priceChangeLabel.text = "(\(price)))"
+        priceChangeLabel.text = "(\(price))"
         priceChangeLabel.textColor = perChangeLabel.textColor
         guard let result = viewModel.calculateHigestAndLowest(sparkline: selectedModel.sparkline) else { return }
         let (highest, lowest) = result

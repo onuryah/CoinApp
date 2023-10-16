@@ -17,9 +17,12 @@ protocol MainBusinessLayer {
     var view: MainDisplayLayer? { get set }
     var coinArray: [Coin]? { get }
     var delegate: MainTableViewDelegate? { get set }
+    var sortArray: [String] { get set }
+    var selectedSortType: String? { get set }
     
     func fetchUpComingDataList()
     func navigateToDetails(model: Coin, viewController: UIViewController)
+    func sortDataList()
 }
 
 protocol MainTableViewDelegate: AnyObject {
@@ -27,11 +30,16 @@ protocol MainTableViewDelegate: AnyObject {
 }
 
 class MainVM {
+    enum SortTypes: String {
+        case price, marketCap, change, listedAt, the24HVolume
+    }
     let networkManager: NetworkManager<MainEndpointItem>
     weak var view: MainDisplayLayer?
     weak var delegate: MainTableViewDelegate?
     var coinArray: [Coin]? = []
     var numberOfItems: Int { coinArray?.count ?? 0 }
+    var sortArray: [String] = ["price", "marketCap", "the24HVolume", "change", "listedAt"]
+    var selectedSortType: String? = ""
     
     init(networkManager: NetworkManager<MainEndpointItem>) {
         self.networkManager = networkManager
@@ -39,15 +47,46 @@ class MainVM {
     
     func fetchUpComingDataList() {
         networkManager.request(endpoint: .upcoming(query: "api/v1/dummy/coins"), type: Coins.self) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let response):
-                    self.coinArray = response.data?.coins
-                    self.delegate?.reloadData()
-                case .failure(let error):
-                    print(String(describing: error))
-                }
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                self.coinArray = response.data?.coins
+                self.delegate?.reloadData()
+            case .failure(let error):
+                print(String(describing: error))
+            }
         }
+    }
+    
+    func sortDataList() {
+        let keyMap: [SortTypes: KeyPath<Coin, String?>] = [
+            .change: \.change,
+            .price: \.price,
+            .marketCap: \.marketCap,
+            .the24HVolume: \.the24HVolume
+        ]
+
+        if let keyPath = keyMap[SortTypes(rawValue: selectedSortType ?? "") ?? .price] {
+            coinArray = coinArray?.sorted(by: { coin1, coin2 in
+                return (Double(coin1[keyPath: keyPath] ?? "") ?? 0) > (Double(coin2[keyPath: keyPath] ?? "") ?? 0)
+            })
+        }
+        
+        if SortTypes(rawValue: selectedSortType ?? "") == .listedAt {
+            sortDataListByListedAt()
+        }
+    }
+    
+    
+    private func sortDataListByListedAt() {
+        coinArray = coinArray?.sorted(by: { coin1, coin2 in
+            if let listedAt1 = coin1.listedAt, let listedAt2 = coin2.listedAt {
+                let timestamp1 = Int(listedAt1)
+                let timestamp2 = Int(listedAt2)
+                return timestamp1 > timestamp2
+            }
+            return false
+        })
     }
 }
 
