@@ -29,25 +29,25 @@ class DetailsVC: UIViewController {
         let selectedModel = viewModel.model
         symbolLabel.text = selectedModel.symbol
         nameLabel.text = selectedModel.name
-        currentPrice.text = selectedModel.price?.roundToTwoDecimalPlaces(digit: .two)
+        currentPrice.text = selectedModel.price?.formatNumber(digit: .two).addCurrencySymbol()
         perChangeLabel.text = selectedModel.change
-        priceChangeLabel.text = "hesaplanacak"
+        perChangeLabel.textColor = viewModel.getColor(changeString: selectedModel.change ?? "")
+        priceChangeLabel.text = viewModel.calculatePriceChanging(priceArray: viewModel.model.sparkline!)
+        priceChangeLabel.textColor = perChangeLabel.textColor
         timeStampLabel.text = selectedModel.listedAt?.unixTimestampToDate()
         
-        guard let result = calculateHigestAndLowest(sparkline: selectedModel.sparkline) else { return }
+        guard let result = viewModel.calculateHigestAndLowest(sparkline: selectedModel.sparkline) else { return }
         let (highest, lowest) = result
-        highestPrice.text = highest.roundToTwoDecimalPlaces(digit: .two)
-        lowestPrice.text = lowest.roundToTwoDecimalPlaces(digit: .two)
+        highestPrice.text = highest.formatNumber(digit: .two)
+        highestPrice.textColor = .green
+        lowestPrice.text = lowest.formatNumber(digit: .two)
+        lowestPrice.textColor = .red
         
         setDelegates()
     }
 }
 
 extension DetailsVC {
-    private func calculateHigestAndLowest(sparkline: [String]?) -> (String, String)? {
-        guard let maxString = sparkline?.max(), let minString = sparkline?.min() else { return nil }
-        return (maxString, minString)
-    }
 }
 
 extension DetailsVC: UITableViewDelegate, UITableViewDataSource {
@@ -62,7 +62,7 @@ extension DetailsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = viewModel.model.sparkline?[indexPath.row].roundToTwoDecimalPlaces(digit: .two)
+        cell.textLabel?.text = viewModel.model.sparkline?[indexPath.row].formatNumber(digit: .two)
         cell.textLabel?.textAlignment = .center
         return cell
     }

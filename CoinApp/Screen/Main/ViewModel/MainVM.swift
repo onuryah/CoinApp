@@ -36,7 +36,6 @@ class MainVM {
             switch result {
             case .success(let response):
                 coinArray = response.data?.coins
-//                print(coinArray)
             case .failure(let error):
                 print(String(describing: error))
             }

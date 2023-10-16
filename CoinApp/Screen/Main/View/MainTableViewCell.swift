@@ -11,26 +11,27 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var currentPriceLabel: UILabel!
+    @IBOutlet weak var perPriceChangingLabel: UILabel!
     @IBOutlet weak var priceChangingLabel: UILabel!
+    var viewModel: MainTableViewBusinessLayer!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        viewModel = MainTableViewCellVM()
     }
     
     func populate(model: Coin?) {
         guard let model = model else { return }
-//        print(model.iconURL)
         symbolLabel.text = model.symbol
         nameLabel.text = model.name
-        currentPriceLabel.text = model.price
-        priceChangingLabel.text = model.change
+        currentPriceLabel.text = model.price?.formatToNumber().addCurrencySymbol()
+        perPriceChangingLabel.text = (model.change ?? "") + "%"
+        perPriceChangingLabel.textColor = viewModel.getColor(changeString: model.change ?? "")
+        priceChangingLabel.textColor = perPriceChangingLabel.textColor
+        
+        guard let changingPrice = viewModel.calculateChange(inputNumberString: model.price ?? "",
+                                                            percentageChangeString: model.change ?? "") else { return }
+        priceChangingLabel.text = "(\(changingPrice.formatNumber(digit: .three)))"
     }
     
 }
