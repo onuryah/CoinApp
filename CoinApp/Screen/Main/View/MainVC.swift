@@ -22,9 +22,7 @@ class MainVC: UIViewController {
         viewModel = initilazer
         viewModel.fetchUpComingDataList()
         viewModel.view = self
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.tableView.reloadData()
-        }
+        viewModel.delegate = self
     }
 }
 
@@ -54,6 +52,14 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
 extension MainVC: MainDisplayLayer {
     func push(controller: UIViewController) {
         show(controller, sender: nil)
+    }
+}
+
+extension MainVC: MainTableViewDelegate {
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 

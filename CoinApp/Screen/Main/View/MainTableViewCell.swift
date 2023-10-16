@@ -24,7 +24,7 @@ class MainTableViewCell: UITableViewCell {
         guard let model = model else { return }
         symbolLabel.text = model.symbol
         nameLabel.text = model.name
-        currentPriceLabel.text = model.price?.formatToNumber().addCurrencySymbol()
+        currentPriceLabel.text = model.price?.formatNumber(digit: .three).addCurrencySymbol()
         perPriceChangingLabel.text = (model.change ?? "") + "%"
         perPriceChangingLabel.textColor = viewModel.getColor(changeString: model.change ?? "")
         priceChangingLabel.textColor = perPriceChangingLabel.textColor

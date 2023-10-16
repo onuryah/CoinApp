@@ -27,12 +27,5 @@ extension String {
         let formattedString = "$" + self
         return formattedString
     }
-    
-    func formatToNumber() -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.locale = Locale(identifier: "en_US")
-        return formatter.string(from: NSNumber(value: Double(self) ?? 0)) ?? self
-    }
 }
 

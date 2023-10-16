@@ -16,13 +16,20 @@ protocol MainBusinessLayer {
     var numberOfItems: Int { get }
     var view: MainDisplayLayer? { get set }
     var coinArray: [Coin]? { get }
+    var delegate: MainTableViewDelegate? { get set }
+    
     func fetchUpComingDataList()
     func navigateToDetails(model: Coin, viewController: UIViewController)
+}
+
+protocol MainTableViewDelegate: AnyObject {
+    func reloadData()
 }
 
 class MainVM {
     let networkManager: NetworkManager<MainEndpointItem>
     weak var view: MainDisplayLayer?
+    weak var delegate: MainTableViewDelegate?
     var coinArray: [Coin]? = []
     var numberOfItems: Int { coinArray?.count ?? 0 }
     
@@ -32,13 +39,14 @@ class MainVM {
     
     func fetchUpComingDataList() {
         networkManager.request(endpoint: .upcoming(query: "api/v1/dummy/coins"), type: Coins.self) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let response):
-                coinArray = response.data?.coins
-            case .failure(let error):
-                print(String(describing: error))
-            }
+                guard let self = self else { return }
+                switch result {
+                case .success(let response):
+                    self.coinArray = response.data?.coins
+                    self.delegate?.reloadData()
+                case .failure(let error):
+                    print(String(describing: error))
+                }
         }
     }
 }
