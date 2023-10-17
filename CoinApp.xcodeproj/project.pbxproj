@@ -27,6 +27,7 @@
 		A23C92E02ADDCB920077CC45 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23C92DE2ADDCB920077CC45 /* MainCollectionViewCell.swift */; };
 		A23C92E12ADDCB920077CC45 /* MainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A23C92DF2ADDCB920077CC45 /* MainCollectionViewCell.xib */; };
 		A2B2412C2AD940FA0005F5E8 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B2412B2AD940F90005F5E8 /* StringExtension.swift */; };
+		A2C7238E2ADE263100CF2B4C /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = A2C7238D2ADE263100CF2B4C /* SDWebImageSVGCoder */; };
 		A2D4D3C42ADDA613003E62FD /* PriceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D4D3C32ADDA613003E62FD /* PriceHelper.swift */; };
 		A2D7F24D2AD976C9002821BF /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D7F24C2AD976C9002821BF /* IntExtension.swift */; };
 		A2D7F24F2ADD5A45002821BF /* MainTableViewCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D7F24E2ADD5A45002821BF /* MainTableViewCellVM.swift */; };
@@ -69,6 +70,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A23791D82AD5745200238F6D /* Alamofire in Frameworks */,
+				A2C7238E2ADE263100CF2B4C /* SDWebImageSVGCoder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +255,7 @@
 			name = CoinApp;
 			packageProductDependencies = (
 				A23791D72AD5745200238F6D /* Alamofire */,
+				A2C7238D2ADE263100CF2B4C /* SDWebImageSVGCoder */,
 			);
 			productName = CoinApp;
 			productReference = A237919E2AD5608400238F6D /* CoinApp.app */;
@@ -284,6 +287,7 @@
 			mainGroup = A23791952AD5608400238F6D;
 			packageReferences = (
 				A23791D62AD5745200238F6D /* XCRemoteSwiftPackageReference "Alamofire" */,
+				A2C7238C2ADE263100CF2B4C /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
 			);
 			productRefGroup = A237919F2AD5608400238F6D /* Products */;
 			projectDirPath = "";
@@ -560,6 +564,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		A2C7238C2ADE263100CF2B4C /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSVGCoder";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -567,6 +579,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A23791D62AD5745200238F6D /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		A2C7238D2ADE263100CF2B4C /* SDWebImageSVGCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2C7238C2ADE263100CF2B4C /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */;
+			productName = SDWebImageSVGCoder;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImageSVGCoder
 
 class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var symbolLabel: UILabel!
@@ -13,6 +14,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var currentPriceLabel: UILabel!
     @IBOutlet weak var perPriceChangingLabel: UILabel!
     @IBOutlet weak var priceChangingLabel: UILabel!
+    @IBOutlet weak var iconImage: UIImageView!
     var viewModel: MainTableViewBusinessLayer!
     
     override func awakeFromNib() {
@@ -28,6 +30,11 @@ class MainTableViewCell: UITableViewCell {
         perPriceChangingLabel.text = (model.change ?? "") + "%"
         perPriceChangingLabel.textColor = viewModel.getColor(changeString: model.change ?? "")
         priceChangingLabel.textColor = perPriceChangingLabel.textColor
+        
+        guard let url = URL(string: model.iconURL ?? "") else { return }
+        let SVGCoder = SDImageSVGCoder.shared
+        SDImageCodersManager.shared.addCoder(SVGCoder)
+        iconImage.sd_setImage(with: url)
         
         guard let changingPrice = viewModel.calculateChange(inputNumberString: model.price ?? "",
                                                             percentageChangeString: model.change ?? "") else { return }

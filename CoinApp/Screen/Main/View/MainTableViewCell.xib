@@ -108,6 +108,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="currentPriceLabel" destination="uYs-wg-KAi" id="vYx-hm-yYF"/>
+                <outlet property="iconImage" destination="iTB-xK-GCZ" id="71g-gl-STS"/>
                 <outlet property="nameLabel" destination="mDb-fP-dWw" id="YiA-sQ-REU"/>
                 <outlet property="perPriceChangingLabel" destination="gmo-BR-h3r" id="V6T-N8-Fsi"/>
                 <outlet property="priceChangingLabel" destination="dMW-wY-LiY" id="Fkg-o8-ohe"/>
