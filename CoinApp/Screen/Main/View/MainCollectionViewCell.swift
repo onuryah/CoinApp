@@ -7,8 +7,8 @@
 
 import UIKit
 
-class MainCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var typeLabel: UILabel!
+final class MainCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak private var typeLabel: UILabel!
     
     func populate(type: String) {
         typeLabel.text = type

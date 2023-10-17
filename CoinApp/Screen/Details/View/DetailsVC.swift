@@ -7,19 +7,19 @@
 
 import UIKit
 
-class DetailsVC: BaseVC {
-    @IBOutlet weak var symbolLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var currentPrice: UILabel!
-    @IBOutlet weak var perChangeLabel: UILabel!
-    @IBOutlet weak var priceChangeLabel: UILabel!
-    @IBOutlet weak var highestPrice: UILabel!
-    @IBOutlet weak var lowestPrice: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var timeStampLabel: UILabel!
-    @IBOutlet weak var rankLabel: UILabel!
+final class DetailsVC: BaseVC {
+    @IBOutlet weak private var symbolLabel: UILabel!
+    @IBOutlet weak private var nameLabel: UILabel!
+    @IBOutlet weak private var currentPrice: UILabel!
+    @IBOutlet weak private var perChangeLabel: UILabel!
+    @IBOutlet weak private var priceChangeLabel: UILabel!
+    @IBOutlet weak private var highestPrice: UILabel!
+    @IBOutlet weak private var lowestPrice: UILabel!
+    @IBOutlet weak private var tableView: UITableView!
+    @IBOutlet weak private var timeStampLabel: UILabel!
+    @IBOutlet weak private var rankLabel: UILabel!
     
-    var viewModel: DetailsBusinessProtocol!
+    var viewModel: DetailsBusinessProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,22 +27,22 @@ class DetailsVC: BaseVC {
     }
     
     private func setup() {
-        let selectedModel = viewModel.model
-        symbolLabel.text = selectedModel.symbol
-        nameLabel.text = selectedModel.name
-        currentPrice.text = selectedModel.price?.formatNumber(digit: .two).addCurrencySymbol()
-        perChangeLabel.text = selectedModel.change
-        perChangeLabel.textColor = viewModel.getColor(changeString: selectedModel.change ?? "")
-        timeStampLabel.text = selectedModel.listedAt?.unixTimestampToDate()
+        let selectedModel = viewModel?.model
+        symbolLabel.text = selectedModel?.symbol
+        nameLabel.text = selectedModel?.name
+        currentPrice.text = selectedModel?.price?.formatNumber(digit: .two).addCurrencySymbol()
+        perChangeLabel.text = selectedModel?.change
+        perChangeLabel.textColor = viewModel?.getColor(changeString: selectedModel?.change ?? "")
+        timeStampLabel.text = selectedModel?.listedAt?.unixTimestampToDate()
         
         setDelegates()
-        guard let rank = selectedModel.rank else { return }
+        guard let rank = selectedModel?.rank else { return }
         rankLabel.text = "\(rank)"
-        guard let price = viewModel.calculateChange(inputNumberString: selectedModel.price ?? "",
-                                                    percentageChangeString: selectedModel.change ?? "")?.formatNumber(digit: .two) else { return }
+        guard let price = viewModel?.calculateChange(inputNumberString: selectedModel?.price ?? "",
+                                                    percentageChangeString: selectedModel?.change ?? "")?.formatNumber(digit: .two) else { return }
         priceChangeLabel.text = "(\(price))"
         priceChangeLabel.textColor = perChangeLabel.textColor
-        guard let result = viewModel.calculateHigestAndLowest(sparkline: selectedModel.sparkline) else { return }
+        guard let result = viewModel?.calculateHigestAndLowest(sparkline: selectedModel?.sparkline) else { return }
         let (highest, lowest) = result
         highestPrice.text = highest.formatNumber(digit: .two)
         highestPrice.textColor = .green
@@ -58,12 +58,12 @@ extension DetailsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfItems
+        return viewModel?.numberOfItems ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = viewModel.model.sparkline?[indexPath.row].formatNumber(digit: .two)
+        cell.textLabel?.text = viewModel?.model.sparkline?[indexPath.row].formatNumber(digit: .two)
         cell.textLabel?.textAlignment = .center
         return cell
     }

@@ -8,13 +8,13 @@
 import UIKit
 import SDWebImageSVGCoder
 
-class MainTableViewCell: UITableViewCell {
-    @IBOutlet weak var symbolLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var currentPriceLabel: UILabel!
-    @IBOutlet weak var perPriceChangingLabel: UILabel!
-    @IBOutlet weak var priceChangingLabel: UILabel!
-    @IBOutlet weak var iconImage: UIImageView!
+final class MainTableViewCell: UITableViewCell {
+    @IBOutlet weak private var symbolLabel: UILabel!
+    @IBOutlet weak private var nameLabel: UILabel!
+    @IBOutlet weak private var currentPriceLabel: UILabel!
+    @IBOutlet weak private var perPriceChangingLabel: UILabel!
+    @IBOutlet weak private var priceChangingLabel: UILabel!
+    @IBOutlet weak private var iconImage: UIImageView!
     var viewModel: MainTableViewBusinessLayer!
     
     override func awakeFromNib() {

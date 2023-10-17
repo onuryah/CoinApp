@@ -11,6 +11,7 @@ protocol MainTableViewBusinessLayer {
     func getColor(changeString: String) -> UIColor
     func calculateChange(inputNumberString: String, percentageChangeString: String) -> String?
 }
+
 final class MainTableViewCellVM: MainTableViewBusinessLayer {
     func calculateChange(inputNumberString: String, percentageChangeString: String) -> String? {
         PriceHelper.shared.calculateChange(inputNumberString: inputNumberString,

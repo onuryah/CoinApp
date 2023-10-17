@@ -7,13 +7,13 @@
 
 import UIKit
 
-class MainVC: BaseVC {
+final class MainVC: BaseVC {
     @IBOutlet weak private var tableView: UITableView!
-    @IBOutlet weak var sortTypeView: UIView!
-    @IBOutlet weak var sortTypeLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak private var sortTypeView: UIView!
+    @IBOutlet weak private var sortTypeLabel: UILabel!
+    @IBOutlet weak private var collectionView: UICollectionView!
     
-    var viewModel: MainBusinessLayer!
+    var viewModel: MainBusinessLayer?
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -22,10 +22,10 @@ class MainVC: BaseVC {
     private func setup() {
         let initilazer = MainVM(networkManager: NetworkManager())
         viewModel = initilazer
-        viewModel.fetchUpComingDataList()
-        viewModel.view = self
-        viewModel.delegate = self
-        viewModel.alertDelegate = self
+        viewModel?.fetchUpComingDataList()
+        viewModel?.view = self
+        viewModel?.delegate = self
+        viewModel?.alertDelegate = self
         
         tableView.register(MainTableViewCell.nib, forCellReuseIdentifier: MainTableViewCell.identifier)
         collectionView.register(MainCollectionViewCell.nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
@@ -46,19 +46,19 @@ class MainVC: BaseVC {
 
 extension MainVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfItems
+        return viewModel?.numberOfItems ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as! MainTableViewCell
-        let model = viewModel.coinArray?[indexPath.row]
+        let model = viewModel?.coinArray?[indexPath.row]
         cell.populate(model: model)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedModel = (viewModel.coinArray?[indexPath.row])!
-        viewModel.navigateToDetails(model: selectedModel, viewController: self)
+        let selectedModel = (viewModel?.coinArray?[indexPath.row])!
+        viewModel?.navigateToDetails(model: selectedModel, viewController: self)
     }
 
     private func setDelegate() {
@@ -85,20 +85,20 @@ extension MainVC: MainTableViewDelegate {
 
 extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.sortArray.count
+        return viewModel?.sortArray.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as! MainCollectionViewCell
-        cell.populate(type: viewModel.sortArray[indexPath.row])
+        cell.populate(type: viewModel?.sortArray[indexPath.row] ?? "")
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selected = viewModel.sortArray[indexPath.row]
-        viewModel.selectedSortType = selected
+        let selected = viewModel?.sortArray[indexPath.row]
+        viewModel?.selectedSortType = selected
         sortTypeLabel.text = selected
-        viewModel.sortDataList()
+        viewModel?.sortDataList()
         reloadData()
         collectionView.isHidden = true
     }

@@ -29,11 +29,11 @@ protocol MainTableViewDelegate: AnyObject {
     func reloadData()
 }
 
-class MainVM {
+final class MainVM {
     enum SortTypes: String {
         case price, marketCap, change, listedAt, the24HVolume
     }
-    let networkManager: NetworkManager<MainEndpointItem>
+    private let networkManager: NetworkManager<MainEndpointItem>
     weak var view: MainDisplayLayer?
     weak var delegate: MainTableViewDelegate?
     var coinArray: [Coin]? = []
