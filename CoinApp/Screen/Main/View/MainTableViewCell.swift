@@ -31,7 +31,7 @@ class MainTableViewCell: UITableViewCell {
         perPriceChangingLabel.textColor = viewModel.getColor(changeString: model.change ?? "")
         priceChangingLabel.textColor = perPriceChangingLabel.textColor
         
-        guard let url = URL(string: model.iconURL ?? "") else { return }
+        guard let url = URL(string: model.iconUrl ?? "") else { return }
         let SVGCoder = SDImageSVGCoder.shared
         SDImageCodersManager.shared.addCoder(SVGCoder)
         iconImage.sd_setImage(with: url)
@@ -40,7 +40,6 @@ class MainTableViewCell: UITableViewCell {
                                                             percentageChangeString: model.change ?? "") else { return }
         priceChangingLabel.text = "(\(changingPrice.formatNumber(digit: .three)))"
     }
-    
 }
 
 

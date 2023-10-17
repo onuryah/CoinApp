@@ -29,11 +29,11 @@ public enum APIClientError: Error {
         case .handledError(let error):
             return error.status_message
         case .decoding:
-            return "Beklenmeyen bir hata oluştu"
+            return "An unexpected error occurred"
         case .networkError:
-            return "Beklenmeyen bir hata oluştu."
+            return "An unexpected error occurred."
         case .timeout:
-            return "İstek zaman aşımına uğradı, daha sonra tekrar deneyiniz."
+            return "The request has timed out, please try again later."
         case .message(let message):
             return message
         }

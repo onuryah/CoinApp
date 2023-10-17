@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailsVC: UIViewController {
+class DetailsVC: BaseVC {
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var currentPrice: UILabel!
@@ -46,9 +46,6 @@ class DetailsVC: UIViewController {
         lowestPrice.text = lowest.formatNumber(digit: .two)
         lowestPrice.textColor = .red
     }
-}
-
-extension DetailsVC {
 }
 
 extension DetailsVC: UITableViewDelegate, UITableViewDataSource {

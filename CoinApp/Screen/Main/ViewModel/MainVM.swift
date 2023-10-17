@@ -5,7 +5,6 @@
 //  Created by OnurAlp on 10.10.2023.
 //
 
-import Foundation
 import UIKit
 
 protocol MainDisplayLayer: AnyObject {
@@ -19,6 +18,7 @@ protocol MainBusinessLayer {
     var delegate: MainTableViewDelegate? { get set }
     var sortArray: [String] { get set }
     var selectedSortType: String? { get set }
+    var alertDelegate: BaseDelegateProtocol? { get set }
     
     func fetchUpComingDataList()
     func navigateToDetails(model: Coin, viewController: UIViewController)
@@ -40,20 +40,21 @@ class MainVM {
     var numberOfItems: Int { coinArray?.count ?? 0 }
     var sortArray: [String] = ["price", "marketCap", "the24HVolume", "change", "listedAt"]
     var selectedSortType: String? = ""
+    var alertDelegate: BaseDelegateProtocol?
     
     init(networkManager: NetworkManager<MainEndpointItem>) {
         self.networkManager = networkManager
     }
     
     func fetchUpComingDataList() {
-        networkManager.request(endpoint: .upcoming(query: "api/v1/dummy/coins"), type: Coins.self) { [weak self] result in
+        networkManager.request(endpoint: .upcoming(query: ApiConstant.PATH), type: Coins.self) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let response):
                 self.coinArray = response.data?.coins
                 self.delegate?.reloadData()
             case .failure(let error):
-                print(String(describing: error))
+                self.alertDelegate?.createFailureAlert(failMessage: error.message)
             }
         }
     }
@@ -76,7 +77,6 @@ class MainVM {
             sortDataListByListedAt()
         }
     }
-    
     
     private func sortDataListByListedAt() {
         coinArray = coinArray?.sorted(by: { coin1, coin2 in

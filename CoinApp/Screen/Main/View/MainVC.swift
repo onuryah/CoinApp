@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainVC: UIViewController {
+class MainVC: BaseVC {
     @IBOutlet weak private var tableView: UITableView!
     @IBOutlet weak var sortTypeView: UIView!
     @IBOutlet weak var sortTypeLabel: UILabel!
@@ -17,10 +17,6 @@ class MainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        setDelegate()
-        setGestureRecognizer()
-        tableView.register(MainTableViewCell.nib, forCellReuseIdentifier: MainTableViewCell.identifier)
-        collectionView.register(MainCollectionViewCell.nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
     }
     
     private func setup() {
@@ -29,6 +25,13 @@ class MainVC: UIViewController {
         viewModel.fetchUpComingDataList()
         viewModel.view = self
         viewModel.delegate = self
+        viewModel.alertDelegate = self
+        
+        tableView.register(MainTableViewCell.nib, forCellReuseIdentifier: MainTableViewCell.identifier)
+        collectionView.register(MainCollectionViewCell.nib, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
+        
+        setDelegate()
+        setGestureRecognizer()
     }
     
     private func setGestureRecognizer() {
@@ -38,7 +41,6 @@ class MainVC: UIViewController {
     
     @objc func sortTypeViewTapped() {
         collectionView.isHidden = false
-        collectionView.reloadData()
     }
 }
 
