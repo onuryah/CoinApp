@@ -9,3 +9,19 @@ Yes, the application is ready for submission to the App Store. However, I believ
 To optimize the project's overall output, a more refined approach for sharing and collaborating on design, potentially leveraging platforms such as Figma, could be considered. This would facilitate a deeper understanding of the design rationale for developers. Ultimately, this could lead to a more efficient development process.
 
 Regarding the requirements for running the project, no specific tools are necessary. The project can be opened exclusively with Xcode. Furthermore, it's worth noting that the SDWebImageSVGCoder and Alamofire frameworks have been included via the Swift Package Manager, eliminating the need for running 'pod install.' This streamlined setup ensures that the project is readily accessible and that all dependencies are seamlessly managed through the Swift Package Manager, simplifying the development environment and reducing any potential compatibility issues.
+
+# API Reference
+
+    //The API furnishes the project with all pertinent coin data
+GET/ [https://newsapi.org/v2/top-headlines?country=us&q="title"&source"name"&apiKey=a71736c911b149e9acf84fdd00a7e98d](https://psp-merchantpanel-service-sandbox.ozanodeme.com.tr/api/v1/dummy/coins)
+
+
+
+## Third Pary Frameworks
+
+• Alamofire
+• SDWebImageSVGCoder
+
+## Author
+
+https://www.github.com/onuryah
