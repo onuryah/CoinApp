@@ -1,6 +1,6 @@
 # CoinApp
 
-##The design and architectural patterns were selected in alignment with the provided guidelines, aiming for a coherent and consistent approach. The decision to employ the MVVM (Model-View-ViewModel) architectural pattern was made to enhance collaboration with team members during the project's subsequent phases and to promote codebase maintainability. MVVM effectively segregates presentation logic from the user interface, simplifying code management, and extensibility, while offering a structured framework for the project.
+The design and architectural patterns were selected in alignment with the provided guidelines, aiming for a coherent and consistent approach. The decision to employ the MVVM (Model-View-ViewModel) architectural pattern was made to enhance collaboration with team members during the project's subsequent phases and to promote codebase maintainability. MVVM effectively segregates presentation logic from the user interface, simplifying code management, and extensibility, while offering a structured framework for the project.
 
 The aspect of the app that would benefit from more development and improvement is the design. Specifically, there is a need to create a more suitable and aesthetically pleasing design, with particular focus on enhancing the 'Details' section. This involves refining the user interface, optimizing user experience, and addressing any usability issues. Furthermore, a comprehensive redesign can contribute to a more polished and user-friendly application. 
 
