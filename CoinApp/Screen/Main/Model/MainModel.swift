@@ -26,8 +26,9 @@ struct Coin: Codable {
     let change: String?
     let sparkline: [String]?
     let the24HVolume: String?
+    let rank: Int?
 
     enum CodingKeys: String, CodingKey {
-        case symbol, name, iconUrl, marketCap, price, listedAt, change, sparkline, the24HVolume = "24hVolume"
+        case symbol, name, iconUrl, marketCap, price, listedAt, change, rank, sparkline, the24HVolume = "24hVolume"
     }
 }

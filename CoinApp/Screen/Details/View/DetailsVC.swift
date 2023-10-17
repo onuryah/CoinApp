@@ -17,6 +17,7 @@ class DetailsVC: BaseVC {
     @IBOutlet weak var lowestPrice: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var timeStampLabel: UILabel!
+    @IBOutlet weak var rankLabel: UILabel!
     
     var viewModel: DetailsBusinessProtocol!
 
@@ -35,6 +36,8 @@ class DetailsVC: BaseVC {
         timeStampLabel.text = selectedModel.listedAt?.unixTimestampToDate()
         
         setDelegates()
+        guard let rank = selectedModel.rank else { return }
+        rankLabel.text = "\(rank)"
         guard let price = viewModel.calculateChange(inputNumberString: selectedModel.price ?? "",
                                                     percentageChangeString: selectedModel.change ?? "")?.formatNumber(digit: .two) else { return }
         priceChangeLabel.text = "(\(price))"

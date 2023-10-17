@@ -193,10 +193,27 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="3fE-j6-nrZ" userLabel="highAndLowContainer">
-                                <rect key="frame" x="272" y="241" width="110" height="73"/>
+                                <rect key="frame" x="269.5" y="241" width="112.5" height="125.5"/>
                                 <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="LWX-1a-zQJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="112.5" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rank:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqp-86-ENt">
+                                                <rect key="frame" x="0.0" y="0.0" width="44" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLU-j8-uyd" userLabel="Rank">
+                                                <rect key="frame" x="70" y="0.0" width="42.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="UBa-ZH-tAM">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="20.5"/>
+                                        <rect key="frame" x="2.5" y="52.5" width="110" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wGi-1f-cpx">
                                                 <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
@@ -213,7 +230,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="xmI-sb-bQg">
-                                        <rect key="frame" x="4.5" y="52.5" width="105.5" height="20.5"/>
+                                        <rect key="frame" x="7" y="105" width="105.5" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Low:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sL-p8-Bpz">
                                                 <rect key="frame" x="0.0" y="0.0" width="37" height="20.5"/>
@@ -221,7 +238,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jU5-SE-QIE">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jU5-SE-QIE" userLabel="rank">
                                                 <rect key="frame" x="63" y="0.0" width="42.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -266,6 +283,7 @@
                         <outlet property="nameLabel" destination="YIc-kD-IiC" id="NcC-Ie-ZWC"/>
                         <outlet property="perChangeLabel" destination="I5a-hB-3rS" id="rf9-59-TLL"/>
                         <outlet property="priceChangeLabel" destination="CrK-Na-SaE" id="IwS-vg-EgO"/>
+                        <outlet property="rankLabel" destination="ZLU-j8-uyd" id="mjZ-iJ-k25"/>
                         <outlet property="symbolLabel" destination="Gf0-bC-Sga" id="paw-X9-2dh"/>
                         <outlet property="tableView" destination="OPE-pi-JnT" id="hn9-Kb-gQx"/>
                         <outlet property="timeStampLabel" destination="sFn-A8-qgr" id="Xha-EG-dxU"/>
